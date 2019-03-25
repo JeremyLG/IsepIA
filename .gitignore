@@ -1,0 +1,8 @@
+data/
+__pycache__/
+derby.log
+spark-warehouse/
+metastore_db/
+
+# venv
+isep/
