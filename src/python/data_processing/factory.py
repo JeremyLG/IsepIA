@@ -2,8 +2,9 @@ from data_processing.utils import (cast_string_timestamp,
                                    transform,
                                    add_parse_filepath_col,
                                    cast_date_hour_timestamp,
-                                   array_columns_to_rows,
-                                   array_observations_to_rows)
+                                   array_analyses_to_rows,
+                                   array_observations_to_rows,
+                                   array_previsions_to_rows)
 from pyspark.sql import DataFrame
 DataFrame.transform = transform
 
@@ -12,25 +13,33 @@ class Factory:
     def __init__(self, usecase, spark_json, read_path):
         self.usecase = usecase
         self.json_df = spark_json.read_json(read_path)
-        self.json_df.show(50)
 
     def previsions(self):
         df = (self
               .json_df
+              .transform(add_parse_filepath_col(self.usecase))
+              .transform(array_previsions_to_rows())
               .transform(cast_string_timestamp())
-              .transform(add_parse_filepath_col()))
+              .transform(cast_string_timestamp(input_time_col="time_q",
+                                               output_time_col="time_query"))
+              .transform(cast_string_timestamp(input_time_col="time_r",
+                                               output_time_col="time_received"))
+              .transform(cast_date_hour_timestamp(input_time_col="tmp_ts_file",
+                                                  output_time_col="ts_file")))
         return df
 
     def analyses(self):
         df = (self
               .json_df
+              .transform(add_parse_filepath_col(self.usecase))
               .transform(cast_date_hour_timestamp())
-              .transform(array_columns_to_rows()))
+              .transform(array_analyses_to_rows()))
         return df
 
     def observations(self):
         df = (self
               .json_df
+              .transform(add_parse_filepath_col(self.usecase))
               .transform(array_observations_to_rows())
               .transform(cast_string_timestamp()))
         return df

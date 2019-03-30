@@ -1,8 +1,12 @@
+# Liés au projet
 data/
+logs/
+plots/
+data_quality/
+
+# Lié à Python et Spark
 __pycache__/
 derby.log
 spark-warehouse/
 metastore_db/
-
-# venv
 isep/

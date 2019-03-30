@@ -1,0 +1,5 @@
+project_path: /home/jeremy/Documents/isepAI/
+write_es: False
+mode: data_processing,data_modeling
+process_usecases: Previsions
+ml_usecases: classification

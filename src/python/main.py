@@ -1,34 +1,26 @@
-from data_processing.spark_session import SparkJson
-from data_processing.factory import Factory
-from data_processing.utils import write_to_es
+import yaml
+import logging
+import logging.config
+import logging.handlers
+
+from data_modeling import main as M
+from data_processing import main as P
+
+CONF_DIR = "/home/jeremy/Documents/isepAI/conf/"
 
 
-DATA_PATH = "/home/jeremy/Documents/isepAI/data"
-es_conf = {
-    "es.resource": "spark/_doc",
-    "es.nodes": "localhost",
-    "es.port": 9200,
-    "es.mapping.date.rich": False
-}
-write_es = False
-
-
-def build_wildcard_directory(log_type: str):
-    if log_type == "Previsions":
-        return DATA_PATH + "/*/" + log_type + "/*/*.json"
-    elif log_type in ["Observations", "Analyses"]:
-        return DATA_PATH + "/*/" + log_type + "/*.json"
-    else:
-        raise ValueError(f"Le usecase {log_type} n'existe pas")
+def main(conf_dict):
+    logging.config.dictConfig(yaml.safe_load(open(CONF_DIR + 'logging.yml', 'r')))
+    for mode in conf_dict["mode"].split(","):
+        if mode == "data_processing":
+            logging.info("Starting Spark Processing")
+            P.process(conf_dict["process_usecases"], conf_dict["write_es"])
+        if mode == "data_modeling":
+            logging.info("Starting PyTorch Modeling")
+            M.main(conf_dict["ml_usecases"])
 
 
 if __name__ == '__main__':
-    spark_json = SparkJson()
-    usecase = "Observations"  # Previsions ou Analyses ou Observations
-    read_path = build_wildcard_directory(usecase)
-    factory = Factory(usecase, spark_json, read_path)
-    df = factory.process()
-    df.printSchema()
-    df.show(50, False)
-    if write_es:
-        write_to_es(df, es_conf)
+    conf_dict = yaml.safe_load(open(CONF_DIR + 'prod.yml', 'r'))
+    open(conf_dict["project_path"] + "logs/info.log", 'w').close()
+    main(conf_dict)

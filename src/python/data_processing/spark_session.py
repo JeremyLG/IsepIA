@@ -1,4 +1,8 @@
-from pyspark.sql import SparkSession
+import os
+import logging
+from pyspark.sql import SparkSession, DataFrame
+
+logger = logging.getLogger(__name__)
 
 
 class SparkJson:
@@ -18,3 +22,15 @@ class SparkJson:
                 .read
                 .option("multiLine", True)
                 .json(path))
+
+    def write_json(self, df: DataFrame, usecase: str, path: str):
+        logger.info("Writing dataframe to JSON")
+        (df
+         .coalesce(1)
+         .write
+         .mode("overwrite")
+         .json(path))
+        logger.info("Renaming Spark file to human readable name")
+        for file in os.listdir(path):
+            if file.startswith("part") & file.endswith(".json"):
+                os.rename(path + "/" + file, path + "/" + usecase + ".json")
