@@ -40,4 +40,4 @@ def process(process_usecases, write_es):
 
 
 if __name__ == '__main__':
-    process("Analyses,Observations,Previsions")
+    process("Analyses,Observations,Previsions", True)

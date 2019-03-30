@@ -5,11 +5,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def main(ml_usecases):
-    for ml_usecase in ml_usecases.split(","):
+def main(conf_dict):
+    for ml_usecase in conf_dict["ml_usecases"].split(","):
+        logger.info(f"Starting {ml_usecase} usecases")
         if ml_usecase == "classification":
-            logger.info("Starting classification usecases")
-            C.main()
+            C.main(conf_dict["classification_usecase"])
         if ml_usecase == "regression":
-            logger.info("Starting regression usecase")
-            R.main()
+            R.main(conf_dict["regression_usecase"])

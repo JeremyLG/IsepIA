@@ -1,5 +1,8 @@
 project_path: /home/jeremy/Documents/isepAI/
 write_es: False
 mode: data_processing,data_modeling
-process_usecases: Previsions
-ml_usecases: classification
+process_usecases: Analyses,Observations,Previsions
+ml_usecases: classification,regression
+classification_usecase: temperature
+regression_usecase: humidity
+save_models: True

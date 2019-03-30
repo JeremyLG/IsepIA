@@ -4,22 +4,17 @@ from sklearn.model_selection import train_test_split
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
+import logging
 
+logger = logging.getLogger(__name__)
 np.random.seed(1337)
 torch.manual_seed(1337)
 
 DATA_PATH = "/home/jeremy/Documents/isepAI/data"
-USECASE = "temperature"  # humidity or temperature
 LEN_SIZE = 3
 EMBEDDING_SIZE = 64
 BATCH_SIZE = 32
 EPOCH = 100
-if USECASE == "temperature":
-    CLASS_SIZE = 2
-elif USECASE == "humidity":
-    CLASS_SIZE = 3
-else:
-    raise ValueError("Usecase not set")
 SAVE_MODEL = True
 
 
@@ -80,6 +75,9 @@ class Estimator(object):
                                                   batch_size)
                 val_log = "- val_loss: %06.4f - val_acc: %06.4f" % (val_loss, val_acc)
             print("Epoch %s/%s loss: %06.4f - acc: %06.4f %s" % (t, nb_epoch, loss, acc, val_log))
+            if t % 5 == 0:
+                logger.info("Epoch %s/%s loss: %06.4f - acc: %06.4f %s" % (t, nb_epoch, loss, acc,
+                                                                           val_log))
 
     def evaluate(self, X, y, batch_size=32):
         y_pred = self.predict(X)
@@ -123,7 +121,7 @@ class GRU(nn.Module):
         return Variable(torch.randn(1, N, self.hidden_size))
 
 
-def load_data():
+def load_data(USECASE):
     df = pd.read_json(DATA_PATH + "/output/Observations/Observations.json", lines=True)
     class_weights = []
     if USECASE == "humidity":
@@ -138,6 +136,16 @@ def load_data():
     X = df[["humidity", "temperature"]].to_numpy()
     y = df[["target"]].to_numpy()
     return X, y, class_weights
+
+
+def initialise_number_classes(USECASE):
+    if USECASE == "temperature":
+        CLASS_SIZE = 2
+    elif USECASE == "humidity":
+        CLASS_SIZE = 3
+    else:
+        raise ValueError("Usecase not set")
+    return CLASS_SIZE
 
 
 def create_sequences(X, y):
@@ -156,30 +164,43 @@ def freq_classes(a):
     return out
 
 
-def main():
-    X, y, class_weights = load_data()
+def main(USECASE):
+
+    logger.info(f"CLASSIFICATION FOR {USECASE}")
+    CLASS_SIZE = initialise_number_classes(USECASE)
+    logger.info(f"There will be {CLASS_SIZE} classes for this usecase")
+    logger.info("Loading the data")
+    X, y, class_weights = load_data(USECASE)
+    logger.info("Creating the sequences for the GRU model")
     X, y = create_sequences(X, y)
     y = y.reshape(y.shape[0])
+    logger.info("Splitting the dataset into train and test")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+    logger.info("Initialising the GRU model")
     model = GRU(X.shape[2], EMBEDDING_SIZE, CLASS_SIZE)
     clf = Estimator(model)
     clf.compile(optimizer=torch.optim.Adam(model.parameters(), lr=1e-4),
                 loss=nn.CrossEntropyLoss(weight=torch.FloatTensor(class_weights)))
+    logger.info("Starting to fit the model")
     clf.fit(X_train, y_train, batch_size=BATCH_SIZE, nb_epoch=EPOCH,
             validation_data=(X_test, y_test))
     score, acc = clf.evaluate(X_test, y_test)
-    print('Test score:', score)
-    print('Test accuracy:', acc)
-
+    logger.info(f'Test score: {score}')
+    logger.info(f'Test accuracy: {acc}')
     clf.evaluate(X_test, y_test)
     a = clf.predict_classes(X_test)
-    print(freq_classes(a))
-    print(freq_classes(y_test))
+    logger.info("""Ci-dessous la distribution de la variable target selon la prédiction
+                puis selon les vraies valeurs observées""")
+    logger.info("Distribution des valeurs prédites de la variable target")
+    logger.info(freq_classes(a))
+    logger.info("Distribution des valeurs observées de la variable target")
+    logger.info(freq_classes(y_test))
 
     if SAVE_MODEL:
+        logger.info(f"Saving the {USECASE} classification model")
         torch.save(model, 'models/classification_' + USECASE + '.pt')
     return clf
 
 
 if __name__ == '__main__':
-    main()
+    main("temperature")

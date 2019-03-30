@@ -17,7 +17,7 @@ def main(conf_dict):
             P.process(conf_dict["process_usecases"], conf_dict["write_es"])
         if mode == "data_modeling":
             logging.info("Starting PyTorch Modeling")
-            M.main(conf_dict["ml_usecases"])
+            M.main(conf_dict)
 
 
 if __name__ == '__main__':
