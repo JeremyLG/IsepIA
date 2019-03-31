@@ -24,12 +24,14 @@ crop lodging.
 
 ## What you need to do
 
-- git clone github.com/JeremyLG/isepIA
-- cd isepIA
-- python3 -m venv isep
-- source isep/bin/activate
-- pip3 install requirements.txt
-- python3 src/python/main.py
+```shell
+git clone https://github.com/JeremyLG/isepIA
+cd isepIA
+python3 -m venv isep
+source isep/bin/activate
+pip3 install -r requirements.txt
+python3 src/python/main.py
+```
 
 ## Configuration
 

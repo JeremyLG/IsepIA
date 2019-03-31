@@ -69,3 +69,6 @@
 2019-03-31 09:23:38,392 - data_modeling.regression - INFO - Our humidity GRU Model has a RMSE, on the test set, of: 15.579355298895306
 2019-03-31 09:23:38,392 - data_modeling.regression - INFO - The average error per prediction for humidity, on the test set, is: 4.636164873495869
 2019-03-31 09:23:38,393 - data_modeling.regression - INFO - Saving the regression model
+2019-03-31 09:46:06,875 - root - INFO - Starting Spark Processing
+2019-03-31 09:46:09,361 - data_processing.main - INFO - Starting to process with Spark the 3 data sources
+2019-03-31 09:46:09,361 - data_processing.main - INFO - Starting usecase : Analyses
