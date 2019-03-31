@@ -22,7 +22,7 @@ crop lodging.
 3. Can we integrate observation data into predictive models, but also forecast errors?
 4. Propose AI models that can be applied to this data and that are of interest to farmers?
 
-## What you need to do
+## What you need to do
 
 ```shell
 git clone https://github.com/JeremyLG/isepIA
@@ -33,7 +33,7 @@ pip3 install -r requirements.txt
 python3 src/python/main.py
 ```
 
-## Configuration
+## Configuration
 
 - **prod.yml** : Different options while executing the main
   - project_path : where the project is located on your OS
