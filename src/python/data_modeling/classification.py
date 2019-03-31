@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 np.random.seed(1337)
 torch.manual_seed(1337)
 
-DATA_PATH = "/home/jeremy/Documents/isepAI/data"
+DATA_PATH = "data/"
 LEN_SIZE = 3
 EMBEDDING_SIZE = 64
 BATCH_SIZE = 32
@@ -122,7 +122,7 @@ class GRU(nn.Module):
 
 
 def load_data(USECASE):
-    df = pd.read_json(DATA_PATH + "/output/Observations/Observations.json", lines=True)
+    df = pd.read_json(DATA_PATH + "output/Observations/Observations.json", lines=True)
     class_weights = []
     if USECASE == "humidity":
         df["target"] = np.where((df['humidity'] < 40), 1, 0)

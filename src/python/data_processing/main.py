@@ -5,7 +5,7 @@ from data_processing.factory import Factory
 from data_processing.utils import write_to_es
 
 logger = logging.getLogger(__name__)
-DATA_PATH = "/home/jeremy/Documents/isepAI/data"
+DATA_PATH = "data/"
 
 es_conf = {
     "es.resource": "spark/_doc",

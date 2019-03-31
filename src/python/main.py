@@ -6,7 +6,7 @@ import logging.handlers
 from data_modeling import main as M
 from data_processing import main as P
 
-CONF_DIR = "/home/jeremy/Documents/isepAI/conf/"
+CONF_DIR = "conf/"
 
 
 def main(conf_dict):
@@ -22,5 +22,5 @@ def main(conf_dict):
 
 if __name__ == '__main__':
     conf_dict = yaml.safe_load(open(CONF_DIR + 'prod.yml', 'r'))
-    open(conf_dict["project_path"] + "logs/info.log", 'w').close()
+    open("logs/info.log", 'w').close()
     main(conf_dict)

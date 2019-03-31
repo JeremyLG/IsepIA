@@ -1,6 +1,5 @@
 # Liés au projet
-data/
-logs/
+data/fake_data/
 plots/
 data_quality/
 
@@ -10,3 +9,6 @@ derby.log
 spark-warehouse/
 metastore_db/
 isep/
+_SUCCESS
+._SUCCESS.crc
+.part*

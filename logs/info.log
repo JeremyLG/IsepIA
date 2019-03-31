@@ -1,0 +1,71 @@
+2019-03-31 09:20:54,283 - root - INFO - Starting Spark Processing
+2019-03-31 09:20:56,228 - data_processing.main - INFO - Starting to process with Spark the 3 data sources
+2019-03-31 09:20:56,228 - data_processing.main - INFO - Starting usecase : Analyses
+2019-03-31 09:21:48,207 - data_processing.spark_session - INFO - Writing dataframe to JSON
+2019-03-31 09:21:50,636 - data_processing.spark_session - INFO - Renaming Spark file to human readable name
+2019-03-31 09:21:50,636 - data_processing.main - INFO - Starting usecase : Observations
+2019-03-31 09:22:14,821 - data_processing.spark_session - INFO - Writing dataframe to JSON
+2019-03-31 09:22:15,340 - data_processing.spark_session - INFO - Renaming Spark file to human readable name
+2019-03-31 09:22:15,341 - data_processing.main - INFO - Starting usecase : Previsions
+2019-03-31 09:23:01,694 - data_processing.spark_session - INFO - Writing dataframe to JSON
+2019-03-31 09:23:03,929 - data_processing.spark_session - INFO - Renaming Spark file to human readable name
+2019-03-31 09:23:03,929 - root - INFO - Starting PyTorch Modeling
+2019-03-31 09:23:03,929 - data_modeling.main - INFO - Starting classification usecases
+2019-03-31 09:23:03,929 - data_modeling.classification - INFO - CLASSIFICATION FOR temperature
+2019-03-31 09:23:03,929 - data_modeling.classification - INFO - There will be 2 classes for this usecase
+2019-03-31 09:23:03,930 - data_modeling.classification - INFO - Loading the data
+2019-03-31 09:23:03,956 - data_modeling.classification - INFO - Creating the sequences for the GRU model
+2019-03-31 09:23:03,958 - data_modeling.classification - INFO - Splitting the dataset into train and test
+2019-03-31 09:23:03,958 - data_modeling.classification - INFO - Initialising the GRU model
+2019-03-31 09:23:03,962 - data_modeling.classification - INFO - Starting to fit the model
+2019-03-31 09:23:04,546 - data_modeling.classification - INFO - Epoch 5/100 loss: 0.6219 - acc: 0.7612 - val_loss: 0.6116 - val_acc: 0.7892
+2019-03-31 09:23:05,119 - data_modeling.classification - INFO - Epoch 10/100 loss: 0.4598 - acc: 0.8097 - val_loss: 0.4140 - val_acc: 0.8405
+2019-03-31 09:23:05,666 - data_modeling.classification - INFO - Epoch 15/100 loss: 0.3924 - acc: 0.8232 - val_loss: 0.3412 - val_acc: 0.8262
+2019-03-31 09:23:06,216 - data_modeling.classification - INFO - Epoch 20/100 loss: 0.3576 - acc: 0.8255 - val_loss: 0.2909 - val_acc: 0.8291
+2019-03-31 09:23:06,882 - data_modeling.classification - INFO - Epoch 25/100 loss: 0.3291 - acc: 0.8384 - val_loss: 0.2792 - val_acc: 0.8262
+2019-03-31 09:23:07,450 - data_modeling.classification - INFO - Epoch 30/100 loss: 0.3171 - acc: 0.8392 - val_loss: 0.2725 - val_acc: 0.8348
+2019-03-31 09:23:08,101 - data_modeling.classification - INFO - Epoch 35/100 loss: 0.3204 - acc: 0.8384 - val_loss: 0.2574 - val_acc: 0.8348
+2019-03-31 09:23:08,698 - data_modeling.classification - INFO - Epoch 40/100 loss: 0.3068 - acc: 0.8448 - val_loss: 0.2557 - val_acc: 0.8490
+2019-03-31 09:23:09,274 - data_modeling.classification - INFO - Epoch 45/100 loss: 0.3039 - acc: 0.8477 - val_loss: 0.2449 - val_acc: 0.8433
+2019-03-31 09:23:09,870 - data_modeling.classification - INFO - Epoch 50/100 loss: 0.2929 - acc: 0.8563 - val_loss: 0.2421 - val_acc: 0.8547
+2019-03-31 09:23:10,458 - data_modeling.classification - INFO - Epoch 55/100 loss: 0.2985 - acc: 0.8563 - val_loss: 0.2475 - val_acc: 0.8547
+2019-03-31 09:23:11,076 - data_modeling.classification - INFO - Epoch 60/100 loss: 0.2927 - acc: 0.8611 - val_loss: 0.2360 - val_acc: 0.8604
+2019-03-31 09:23:11,653 - data_modeling.classification - INFO - Epoch 65/100 loss: 0.2874 - acc: 0.8554 - val_loss: 0.2351 - val_acc: 0.8661
+2019-03-31 09:23:12,210 - data_modeling.classification - INFO - Epoch 70/100 loss: 0.2823 - acc: 0.8618 - val_loss: 0.2273 - val_acc: 0.8632
+2019-03-31 09:23:12,750 - data_modeling.classification - INFO - Epoch 75/100 loss: 0.2798 - acc: 0.8654 - val_loss: 0.2293 - val_acc: 0.8575
+2019-03-31 09:23:13,307 - data_modeling.classification - INFO - Epoch 80/100 loss: 0.2683 - acc: 0.8698 - val_loss: 0.2336 - val_acc: 0.8547
+2019-03-31 09:23:13,895 - data_modeling.classification - INFO - Epoch 85/100 loss: 0.2705 - acc: 0.8648 - val_loss: 0.2196 - val_acc: 0.8689
+2019-03-31 09:23:14,470 - data_modeling.classification - INFO - Epoch 90/100 loss: 0.2700 - acc: 0.8638 - val_loss: 0.2188 - val_acc: 0.8775
+2019-03-31 09:23:15,046 - data_modeling.classification - INFO - Epoch 95/100 loss: 0.2689 - acc: 0.8692 - val_loss: 0.2348 - val_acc: 0.8661
+2019-03-31 09:23:15,593 - data_modeling.classification - INFO - Epoch 100/100 loss: 0.2693 - acc: 0.8661 - val_loss: 0.2173 - val_acc: 0.8803
+2019-03-31 09:23:15,597 - data_modeling.classification - INFO - Test score: 0.22710110247135162
+2019-03-31 09:23:15,598 - data_modeling.classification - INFO - Test accuracy: 0.8746438746438746
+2019-03-31 09:23:15,604 - data_modeling.classification - INFO - Ci-dessous la distribution de la variable target selon la prédiction
+                puis selon les vraies valeurs observées
+2019-03-31 09:23:15,604 - data_modeling.classification - INFO - Distribution des valeurs prédites de la variable target
+2019-03-31 09:23:15,605 - data_modeling.classification - INFO - [[0.         0.75498575]
+ [1.         0.24501425]]
+2019-03-31 09:23:15,605 - data_modeling.classification - INFO - Distribution des valeurs observées de la variable target
+2019-03-31 09:23:15,605 - data_modeling.classification - INFO - [[0.         0.87179487]
+ [1.         0.12820513]]
+2019-03-31 09:23:15,606 - data_modeling.classification - INFO - Saving the temperature classification model
+2019-03-31 09:23:15,617 - data_modeling.main - INFO - Starting regression usecases
+2019-03-31 09:23:15,617 - data_modeling.regression - INFO - REGRESSION FOR humidity
+2019-03-31 09:23:15,617 - data_modeling.regression - INFO - Loading the data
+2019-03-31 09:23:15,635 - data_modeling.regression - INFO - Creating the sequences for the GRU model
+2019-03-31 09:23:15,636 - data_modeling.regression - INFO - Splitting the dataset into train and test
+2019-03-31 09:23:15,637 - data_modeling.regression - INFO - Initialising the GRU model
+2019-03-31 09:23:15,637 - data_modeling.regression - INFO - Starting to fit the model
+2019-03-31 09:23:17,796 - data_modeling.regression - INFO - Epoch 10/100 loss: 3.0056 - val_loss: 2.9605
+2019-03-31 09:23:19,998 - data_modeling.regression - INFO - Epoch 20/100 loss: 0.7002 - val_loss: 0.6095
+2019-03-31 09:23:22,055 - data_modeling.regression - INFO - Epoch 30/100 loss: 0.2738 - val_loss: 0.2606
+2019-03-31 09:23:24,062 - data_modeling.regression - INFO - Epoch 40/100 loss: 0.2737 - val_loss: 0.2606
+2019-03-31 09:23:26,368 - data_modeling.regression - INFO - Epoch 50/100 loss: 0.2737 - val_loss: 0.2606
+2019-03-31 09:23:28,624 - data_modeling.regression - INFO - Epoch 60/100 loss: 0.2737 - val_loss: 0.2606
+2019-03-31 09:23:31,818 - data_modeling.regression - INFO - Epoch 70/100 loss: 0.2737 - val_loss: 0.2606
+2019-03-31 09:23:33,948 - data_modeling.regression - INFO - Epoch 80/100 loss: 0.2737 - val_loss: 0.2606
+2019-03-31 09:23:36,147 - data_modeling.regression - INFO - Epoch 90/100 loss: 0.2737 - val_loss: 0.2606
+2019-03-31 09:23:38,380 - data_modeling.regression - INFO - Epoch 100/100 loss: 0.2737 - val_loss: 0.2605
+2019-03-31 09:23:38,392 - data_modeling.regression - INFO - Our humidity GRU Model has a RMSE, on the test set, of: 15.579355298895306
+2019-03-31 09:23:38,392 - data_modeling.regression - INFO - The average error per prediction for humidity, on the test set, is: 4.636164873495869
+2019-03-31 09:23:38,393 - data_modeling.regression - INFO - Saving the regression model
